@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="contactApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Contacts  test application</title>
+    <link rel="stylesheet" href="Libraries/bootstrap.min.css">
+    <link rel="stylesheet" href="Libraries/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="Libraries/CSS/style.css">
+</head>
+<body>
+<div class="navbar navbar-inverse  bs-docs-nav" role="banner">
+    <div class="container">
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="./" class="navbar-brand">Contacts application</a>
+        </div>
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+            <ul class="nav navbar-nav">
+            </ul>
+        </nav>
+    </div>
+</div>
+<div class="clearfix"></div>
+<div ng-controller="mainCtrl" >
+    <div class="contents">
+     <h1 align="center">My contacts application</h1>
+        <h3>Contacts count: {{contacts.length}} </h3>
+        <div style="margin: 20px;">
+            <button class="btn btn-success" ng-click="showForm()">Add new contact</button>
+        </div>
+        <table class="table table-bordered table-hover">
+            <thead>
+                <th>#№</th>
+                <th>#Name</th>
+                <th>#Last Name</th>
+                <th>#Address</th>
+                <th>#Telephone</th>
+                <th>#Action</th>
+            </thead>
+            <tbody>
+            <tr ng-show="addContactVisible">
+                <td>&nbsp;</td>
+                <td><input class="form-control" ng-model="newcontact.name"></td>
+                <td><input class="form-control" ng-model="newcontact.lastname"></td>
+                <td><input class="form-control" ng-model="newcontact.address"></td>
+                <td><input class="form-control" ng-model="newcontact.telephone"></td>
+                <td><button class="btn btn-primary form-control" ng-click="addNewContact()">Save new contact</button></td>
+            </tr>
+            <tr ng-repeat="contact in contacts" ng-hide="doEdit">
+                <td>{{$index}}</td>
+                <td>{{contact.name}}</td>
+                <td>{{contact.lastname}}</td>
+                <td>{{contact.address}}</td>
+                <td>{{contact.telephone}}</td>
+                <td>
+                    <button class="btn btn-info" style="width:45%" ng-click="doEditContact(this)">Edit</button>
+                    <button class="btn btn-warning " style="width: 45%" ng-click="deleteFromDB(this)">Delete</button>
+                </td>
+            </tr>
+            <tr ng-show="doEdit">
+                <td>&nbsp;</td>
+                <td><input class="form-control" ng-model="editcontact.name"></td>
+                <td><input class="form-control" ng-model="editcontact.lastname"></td>
+                <td><input class="form-control" ng-model="editcontact.address"></td>
+                <td><input class="form-control" ng-model="editcontact.telephone"></td>
+                <td><button class="btn btn-success" style="width: 99%" ng-click="doSave()">Save this contact</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="Libraries/angular.min.js"></script>
+<script src="Libraries/app/controllers/mainController.js"></script>
+<script src="Libraries/app/filters/contacts.js"></script>
+</body>
+</html>
